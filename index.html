@@ -19,9 +19,6 @@
     --volcan: #955A34;
     --line: rgba(36, 26, 17, 0.14);
     --shadow: rgba(36, 26, 17, 0.18);
-    --note-yellow: #F2D879;
-    --note-pink: #F0B8C4;
-    --note-mint: #B9DBC9;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -40,9 +37,6 @@
       --volcan: #D19A6A;
       --line: rgba(242, 233, 216, 0.16);
       --shadow: rgba(0, 0, 0, 0.45);
-      --note-yellow: #A88C3F;
-      --note-pink: #9C6470;
-      --note-mint: #5E8770;
     }
   }
 
@@ -61,9 +55,6 @@
     --volcan: #D19A6A;
     --line: rgba(242, 233, 216, 0.16);
     --shadow: rgba(0, 0, 0, 0.45);
-    --note-yellow: #A88C3F;
-    --note-pink: #9C6470;
-    --note-mint: #5E8770;
   }
 
   * { box-sizing: border-box; }
@@ -312,59 +303,50 @@
   }
   .card-strip b { color: var(--tint); font-family: "Space Mono", monospace; }
 
-  /* ---------- stand / dynamic ---------- */
-  .stand {
+  /* ---------- benefits ---------- */
+  .benefits {
     background: var(--husk-2);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     padding: clamp(3rem, 6vw, 4.5rem) 0;
   }
-  .stand-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: center;
-  }
-  .stand h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 1rem; }
-  .stand p { color: var(--ink-soft); max-width: 50ch; }
-  .stand p + p { margin-top: 0.8rem; }
-  .stand ol {
-    margin: 1.2rem 0 0;
-    padding-left: 1.2rem;
-    color: var(--ink-soft);
+  .benefits-head {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin-bottom: 2rem;
   }
-  .stand ol b { color: var(--ink); font-family: "Fraunces", serif; font-weight: 600; }
+  .benefits-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 
-  .board {
-    position: relative;
-    background: color-mix(in srgb, var(--cafe) 24%, var(--paper));
-    border: 10px solid color-mix(in srgb, var(--cafe) 55%, var(--ink));
-    border-radius: 4px;
-    min-height: 300px;
-    padding: 2rem 1.5rem;
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+  }
+  @media (max-width: 900px) { .benefit-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .benefit-grid { grid-template-columns: 1fr; } }
+
+  .benefit {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.5rem 1.3rem;
     display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .benefit .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--clay) 16%, var(--paper));
+    color: var(--clay-deep);
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
-  .note {
-    font-family: "Space Mono", monospace;
-    font-size: 0.78rem;
-    line-height: 1.4;
-    padding: 0.9rem 0.85rem;
-    width: 118px;
-    box-shadow: 0 6px 14px -8px rgba(0,0,0,0.45);
-    color: #241A11;
-  }
-  .note.y { background: var(--note-yellow); transform: rotate(-4deg); }
-  .note.p { background: var(--note-pink); transform: rotate(3deg); margin-top: 1.4rem; }
-  .note.m { background: var(--note-mint); transform: rotate(-2deg); }
-  .note.y2 { background: var(--note-yellow); transform: rotate(5deg); margin-top: 0.6rem; }
-  .note.p2 { background: var(--note-pink); transform: rotate(-3deg); }
+  .benefit h3 { font-size: 1.06rem; }
+  .benefit p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
 
   /* ---------- footer ---------- */
   footer {
@@ -432,6 +414,10 @@
   .quotes .reveal:nth-child(1) { transition-delay: 0.02s; }
   .quotes .reveal:nth-child(2) { transition-delay: 0.1s; }
   .quotes .reveal:nth-child(3) { transition-delay: 0.18s; }
+  .benefit-grid .reveal:nth-child(1) { transition-delay: 0.02s; }
+  .benefit-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+  .benefit-grid .reveal:nth-child(3) { transition-delay: 0.14s; }
+  .benefit-grid .reveal:nth-child(4) { transition-delay: 0.2s; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
   }
@@ -440,12 +426,8 @@
   .card-photo img { transition: transform 0.5s ease; }
   .card:hover .card-photo img { transform: scale(1.07); }
 
-  .note { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-  .note.y:hover { transform: rotate(-4deg) translateY(-6px) scale(1.04); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.5); }
-  .note.p:hover { transform: rotate(3deg) translateY(-6px) scale(1.04); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.5); }
-  .note.m:hover { transform: rotate(-2deg) translateY(-6px) scale(1.04); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.5); }
-  .note.y2:hover { transform: rotate(5deg) translateY(-6px) scale(1.04); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.5); }
-  .note.p2:hover { transform: rotate(-3deg) translateY(-6px) scale(1.04); box-shadow: 0 12px 20px -10px rgba(0,0,0,0.5); }
+  .benefit { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .benefit:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -14px var(--shadow); }
 
   .hero-banner img { transition: transform 0.6s ease; }
   .hero-banner:hover img { transform: scale(1.015); }
@@ -466,14 +448,10 @@
     .hero-inner { grid-template-columns: 1fr; align-items: start; }
     .hero-facts { justify-self: stretch; max-width: none; }
     .intro-inner { grid-template-columns: 1fr; }
-    .stand-inner { grid-template-columns: 1fr; }
-    .stand-inner .board { order: 2; }
-    .board { min-height: 220px; padding: 1.5rem 1rem; }
     .foot-top { align-items: flex-start; }
     footer .meta { text-align: left; }
   }
   @media (max-width: 480px) {
-    .note { width: 42%; }
     .hero-facts { padding: 1.1rem 1.2rem; }
   }
 
@@ -669,25 +647,33 @@
   </div>
 </section>
 
-<section class="stand">
-  <div class="wrap stand-inner">
-    <div class="reveal">
-      <span class="label" style="color:var(--clay-deep)">La experiencia en el stand</span>
-      <h2 style="margin-top:0.6rem">Un aroma, un recuerdo</h2>
-      <p>En la presentación del proyecto, cada visitante toma al azar una tarjeta con uno de los cinco aromas de la colección. El equipo le acerca el jabón correspondiente para que lo huela de cerca y reconozca qué le transmite antes de saber de qué lugar se trata.</p>
-      <p>Después se le invita a escribir en una nota adhesiva el recuerdo, la emoción o el lugar que ese aroma le evocó, y a pegarla en el mural del stand. Al final de la jornada, el mural reúne una pequeña colección de memorias tan distintas como los propios aromas.</p>
-      <ol>
-        <li><b>Elegir</b> una tarjeta al azar entre los cinco aromas.</li>
-        <li><b>Oler</b> la barra correspondiente y describir la primera sensación.</li>
-        <li><b>Compartir</b> un recuerdo en una nota y colocarla en el mural.</li>
-      </ol>
+<section class="benefits">
+  <div class="wrap">
+    <div class="benefits-head reveal">
+      <span class="label" style="color:var(--clay-deep)">Por qué elegir un jabón artesanal</span>
+      <h2>Lo que gana tu piel</h2>
     </div>
-    <div class="board reveal">
-      <div class="note y">las vacaciones en la playa con mi familia</div>
-      <div class="note p">el jardín de mi abuela un domingo</div>
-      <div class="note m">el desayuno de mi papá antes del trabajo</div>
-      <div class="note y2">el viaje escolar a la montaña</div>
-      <div class="note p2">el olor después de la lluvia</div>
+    <div class="benefit-grid">
+      <article class="benefit reveal">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 4c-9 0-16 6-16 15 9 0 15-6 16-15Z"/><path d="M6 18C10 13 14 9 19 5"/></svg></span>
+        <h3>Ingredientes naturales</h3>
+        <p>Glicerina vegetal y aceites esenciales; sin sulfatos ni parabenos que resequen o irriten la piel.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c3.5 4 6 7.4 6 10.5A6 6 0 0 1 6 13.5C6 10.4 8.5 7 12 3Z"/></svg></span>
+        <h3>Elaboración en frío, a mano</h3>
+        <p>Cada barra se cura varias semanas de forma artesanal, sin procesos industriales que degraden sus propiedades.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.3-9.3-8.7C1.2 8.1 3 5 6.3 5c2 0 3.3 1.1 4 2.2C11 6.1 12.3 5 14.3 5c3.3 0 5.1 3.1 3.6 6.3C15.6 15.7 12 20 12 20Z"/></svg></span>
+        <h3>Suave con la piel sensible</h3>
+        <p>La glicerina retiene la humedad natural de la piel en lugar de resecarla, a diferencia del jabón industrial.</p>
+      </article>
+      <article class="benefit reveal">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 19 9 8l4 6 2-3 6 8Z"/></svg></span>
+        <h3>Identidad 100% cuscatleca</h3>
+        <p>Cada aroma nace de un lugar real de El Salvador y apoya la producción artesanal a pequeña escala.</p>
+      </article>
     </div>
   </div>
 </section>
