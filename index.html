@@ -429,6 +429,9 @@
   .cards .reveal:nth-child(3) { transition-delay: 0.16s; }
   .cards .reveal:nth-child(4) { transition-delay: 0.23s; }
   .cards .reveal:nth-child(5) { transition-delay: 0.30s; }
+  .quotes .reveal:nth-child(1) { transition-delay: 0.02s; }
+  .quotes .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .quotes .reveal:nth-child(3) { transition-delay: 0.18s; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
   }
@@ -473,6 +476,93 @@
     .note { width: 42%; }
     .hero-facts { padding: 1.1rem 1.2rem; }
   }
+
+  /* ---------- voices / rating ---------- */
+  .voices { padding: clamp(3rem, 6vw, 4.5rem) 0; }
+  .voices-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .voices-head .label { color: var(--ink-soft); }
+  .voices-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+  }
+  @media (max-width: 760px) { .quotes { grid-template-columns: 1fr; } }
+
+  .quote {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.4rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .quote p {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin: 0;
+  }
+  .quote .who {
+    font-family: "Space Mono", monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tint, var(--clay));
+  }
+
+  .rate-box {
+    margin-top: clamp(2rem, 4vw, 2.6rem);
+    padding: clamp(1.6rem, 4vw, 2.2rem);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    text-align: center;
+    background: color-mix(in srgb, var(--paper) 70%, transparent);
+  }
+  .rate-box p.rate-lede { margin: 0 0 1rem; color: var(--ink-soft); }
+  .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  .stars input {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .stars label {
+    font-size: 2.1rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--line);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+  .stars label:hover,
+  .stars label:hover ~ label,
+  .stars input:checked ~ label {
+    color: var(--clay);
+  }
+  .stars label:hover { transform: scale(1.15); }
+  .stars input:focus-visible + label { outline: 2px solid var(--clay); outline-offset: 3px; border-radius: 2px; }
+  .rate-thanks {
+    margin-top: 0.9rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--clay-deep);
+    min-height: 1.2em;
+  }
 </style>
 
 <div class="credit-bar">
@@ -491,7 +581,7 @@
   <div class="hero-inner">
     <div>
       <span class="label">Jabonería artesanal &middot; El Salvador</span>
-      <h1>Cinco lugares.<br>Cinco aromas.<br><em>Un solo Cuscatlán.</em></h1>
+      <h1>Huele a casa,<br><em>aunque estés lejos.</em></h1>
       <p class="hero-slogan">&ldquo;Un aroma que cuenta nuestra historia.&rdquo;</p>
       <p class="hero-sub">Esencias Cuscatlecas es una línea de jabones artesanales que embotella el olfato de El Salvador: flores de montaña, sal de playa, café recién tostado y ceniza de volcán, tallados en barra.</p>
       <a class="cta-link" href="#coleccion">Ver la colección <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4v14M6 13l6 6 6-6"/></svg></a>
@@ -587,9 +677,9 @@
       <p>En la presentación del proyecto, cada visitante toma al azar una tarjeta con uno de los cinco aromas de la colección. El equipo le acerca el jabón correspondiente para que lo huela de cerca y reconozca qué le transmite antes de saber de qué lugar se trata.</p>
       <p>Después se le invita a escribir en una nota adhesiva el recuerdo, la emoción o el lugar que ese aroma le evocó, y a pegarla en el mural del stand. Al final de la jornada, el mural reúne una pequeña colección de memorias tan distintas como los propios aromas.</p>
       <ol>
-        <li><b>1. Elegir</b> una tarjeta al azar entre los cinco aromas.</li>
-        <li><b>2. Oler</b> la barra correspondiente y describir la primera sensación.</li>
-        <li><b>3. Compartir</b> un recuerdo en una nota y colocarla en el mural.</li>
+        <li><b>Elegir</b> una tarjeta al azar entre los cinco aromas.</li>
+        <li><b>Oler</b> la barra correspondiente y describir la primera sensación.</li>
+        <li><b>Compartir</b> un recuerdo en una nota y colocarla en el mural.</li>
       </ol>
     </div>
     <div class="board reveal">
@@ -598,6 +688,41 @@
       <div class="note m">el desayuno de mi papá antes del trabajo</div>
       <div class="note y2">el viaje escolar a la montaña</div>
       <div class="note p2">el olor después de la lluvia</div>
+    </div>
+  </div>
+</section>
+
+<section class="voices">
+  <div class="wrap">
+    <div class="voices-head reveal">
+      <h2>Lo que dice quien ya lo olió</h2>
+      <span class="label">Voces del stand</span>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote reveal" style="--tint:var(--cafe)">
+        <p>&ldquo;El de Café de Apaneca me regresó directo a la cocina de mi abuela, colando café a las cinco de la mañana.&rdquo;</p>
+        <span class="who">Visitante &middot; aroma Café de Apaneca</span>
+      </blockquote>
+      <blockquote class="quote reveal" style="--tint:var(--oceano)">
+        <p>&ldquo;Olí el de Playa El Tunco y sentí otra vez el viaje familiar de cada Semana Santa.&rdquo;</p>
+        <span class="who">Visitante &middot; aroma Playa El Tunco</span>
+      </blockquote>
+      <blockquote class="quote reveal" style="--tint:var(--flor)">
+        <p>&ldquo;No esperaba que un jabón me hiciera acordarme del viaje escolar a Ataco. Se siente muy nuestro.&rdquo;</p>
+        <span class="who">Visitante &middot; aroma Ruta de las Flores</span>
+      </blockquote>
+    </div>
+
+    <div class="rate-box reveal">
+      <p class="rate-lede">¿Ya oliste alguno de la colección? Cuéntanos qué tanto te transportó.</p>
+      <div class="stars" id="rateStars">
+        <input type="radio" id="r5" name="rating" value="5"><label for="r5" title="5 estrellas">&#9733;</label>
+        <input type="radio" id="r4" name="rating" value="4"><label for="r4" title="4 estrellas">&#9733;</label>
+        <input type="radio" id="r3" name="rating" value="3"><label for="r3" title="3 estrellas">&#9733;</label>
+        <input type="radio" id="r2" name="rating" value="2"><label for="r2" title="2 estrellas">&#9733;</label>
+        <input type="radio" id="r1" name="rating" value="1"><label for="r1" title="1 estrella">&#9733;</label>
+      </div>
+      <p class="rate-thanks" id="rateThanks"></p>
     </div>
   </div>
 </section>
@@ -635,5 +760,34 @@
     });
   }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
   items.forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  var stars = document.getElementById("rateStars");
+  var thanks = document.getElementById("rateThanks");
+  if (!stars || !thanks) return;
+  var KEY = "ec_rating";
+  var messages = {
+    5: "¡Gracias! Nos alegra que te haya transportado a casa.",
+    4: "¡Gracias por tu valoración!",
+    3: "Gracias por contarnos tu experiencia.",
+    2: "Gracias por probar la colección.",
+    1: "Gracias por tu honestidad, seguimos mejorando."
+  };
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) {
+      var input = document.getElementById("r" + saved);
+      if (input) {
+        input.checked = true;
+        thanks.textContent = messages[saved] || "¡Gracias por tu valoración!";
+      }
+    }
+  } catch (e) {}
+  stars.addEventListener("change", function (evt) {
+    var val = evt.target.value;
+    thanks.textContent = messages[val] || "¡Gracias por tu valoración!";
+    try { localStorage.setItem(KEY, val); } catch (e) {}
+  });
 })();
 </script>
